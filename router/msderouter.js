@@ -4,12 +4,14 @@ import { addEvent, deleteEvent, getEvent, getEvents, updateEvent } from "../cont
 
 export const eventRouter = Router()
 
-eventRouter.post('/event', addEvent)
+eventRouter.post('/events', addEvent)
 
-eventRouter.get('/event',getEvents)
+eventRouter.get('/events',getEvents)
 
-eventRouter.get('/event/:id',getEvent)
+eventRouter.get('/events/:id',getEvent)
 
-eventRouter.patch('/event/:id/:caseStatus',updateEvent)
+eventRouter.patch('/events/:id',updateEvent)
 
-eventRouter.delete('event/:id',deleteEvent)
+eventRouter.delete('events/:id',deleteEvent)
+
+
