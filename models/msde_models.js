@@ -3,7 +3,7 @@ import { Schema, model } from "mongoose";
 const eventSchema = new Schema({
     eventNames: { type: String },
     eventDate: { type: Date },
-    eventType: { enum: ['festivals', 'webinar', 'serminar', 'domestic'] },
+    eventType: { type:String, enum: ['concerts', 'serminar', 'tasting'] },
     price: { type: Number },
     eventCompany: { type: String },
     location: { type: String },
