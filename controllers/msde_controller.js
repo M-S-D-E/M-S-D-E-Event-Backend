@@ -16,17 +16,9 @@ export const addEvent = async(req, res) => {
 // Get all Event
 export const getEvents = async (req,res, next) => {
     try {
-         // Get query params
-         const { limit = 10, skip = 0, filter ="()", fields = "()" } = req.query;
-
-       // Get all events from database
-        const allEvents = await eventModel
-            .find(JSON.parse(filter))
-            .select(JSON.parse(fields))
-            .limit(limit)
-            .skip(skip)
-            .sort(sort);
-       res.status(200).json(allEvents)
+        console.log("request",req.body);
+        const getData = await eventModel.find();
+     res.status(200).json(getData)
        
     } catch (error) {
        console.log(error) 
