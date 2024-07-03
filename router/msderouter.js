@@ -10,6 +10,6 @@ eventRouter.get('/event',getEvents)
 
 eventRouter.get('/event/:id',getEvent)
 
-eventRouter.patch('/event/:id/:caseStatus',updateEvent)
+eventRouter.patch('/event/:id',updateEvent)
 
-eventRouter.delete('event/:id',deleteEvent)
+eventRouter.delete('/event/:id',deleteEvent)
