@@ -13,3 +13,5 @@ eventRouter.get('/events/:id',getEvent)
 eventRouter.patch('/events/:id',updateEvent)
 
 eventRouter.delete('events/:id',deleteEvent)
+
+
