@@ -1,5 +1,4 @@
 import { Schema, model } from "mongoose";
-import { toJSON } from "@reis/mongoose-to-json";
 
 const eventSchema = new Schema({
     eventNames: { type: String },
@@ -11,8 +10,7 @@ const eventSchema = new Schema({
     eventStatus: { type: String, enum: ['upcoming', 'completed', 'postponed'] },
     createAt: { type: Date },
     updatedAt: { type: Date },
-    image: { type: String, required: true }
+    image: { type: String }
 })
 
-eventSchema.plugin(toJSON);
 export const eventModel = model('event', eventSchema);
