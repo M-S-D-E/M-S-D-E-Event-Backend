@@ -1,6 +1,6 @@
 import express from "express";
-import mongoose from "mongoose";
 import 'dotenv/config'
+import cors from "cors";
 import expressOasGenerator from "express-oas-generator"; 
 import { dbConnection } from "./config/db.js";
 import { eventRouter } from "./router/msderouter.js";
@@ -11,12 +11,14 @@ const app = express();
 expressOasGenerator.handleResponses(app, {
     alwaysServeDocs:true,
     tags: [ 'event'],
-   // mongooseModels: mongoose.modelNames(),
+  
 });
 
 
 // create middleware
+app.use(cors());
 app.use(express.json());
+
 
 dbConnection();
 app.use(eventRouter);
