@@ -1,16 +1,18 @@
 import express from "express";
 import 'dotenv/config'
 import cors from "cors";
+import mongoose from "mongoose";
 import expressOasGenerator from "express-oas-generator"; 
 import { dbConnection } from "./config/db.js";
 import { eventRouter } from "./router/msderouter.js";
 
-
+await mongoose.connect(process.env.mongodb_url)
 // create express app
 const app = express();
 expressOasGenerator.handleResponses(app, {
     alwaysServeDocs:true,
     tags: [ 'event'],
+    mongooseModels: mongoose.modelNames(),
   
 });
 
