@@ -1,10 +1,11 @@
 import { Router } from "express";
+import { remoteUpload } from "../middlewares/uploads.js";
 import { addEvent, deleteEvent, getEvent, getEvents, updateEvent } from "../controllers/msde_controller.js";
 
 
 export const eventRouter = Router()
 
-eventRouter.post('/events', addEvent)
+eventRouter.post('/events', remoteUpload.single('image') , addEvent)
 
 eventRouter.get('/events',getEvents)
 

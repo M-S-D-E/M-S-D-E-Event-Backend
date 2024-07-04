@@ -1,29 +1,45 @@
 import { eventModel } from "../models/msde_models.js";
 
-export const addEvent = async(req, res) => {
+export const addEvent = async(req, res, next) => {
    
     try {
         console.log('request', req.body)
-         const addData = await eventModel.create(req.body);
-        res.json(req.body);
+         const addData = await eventModel.create({
+            ...req.body,
+            image: req.file.filename
+         });
+        res.status(201).json(addData);
    
     } catch (error) {
-        console.log(error)
+        next(error);
     }
     
 };
 
 // Get all Event
-export const getEvents = async (req,res, next) => {
+export const getEvents = async (req, res, next) => {
     try {
-        console.log("request",req.body);
-        const getData = await eventModel.find();
-     res.status(200).json(getData)
-       
+        // Get query params
+        const { 
+            limit = 10, 
+            skip = 0, 
+            filter = "{}",
+            fields = "{}",
+            sort = "{}"
+         } = req.query;
+        //    Get all events fron Database
+    const allEvents = await eventModel
+    .find(JSON.parse(filter))
+    .sort(JSON.parse(sort))
+    .select(JSON.parse(fields))
+    .limit(limit)
+    .skip(skip);
+        // return all recipes as response
+        res.status(200).json(allEvents);
     } catch (error) {
-       console.log(error) 
+       next(error);
     }
-};
+}
 
 // Get A Single Event 
 export const getEvent = async (req,res,next) => {
